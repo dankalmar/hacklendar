@@ -1,13 +1,6 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>Hacklendar</title>
-  <!-- Bootstrap code -->
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
-  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-  <%= csrf_meta_tags %>
-
-  <meta charset="utf-8">
+	<head>
+	<meta charset="utf-8">
     <title>Bootstrap, from Twitter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -33,30 +26,53 @@
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="../assets/ico/favicon.png">
-</head>
-<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="brand"><%= link_to 'Hacklendar', diary_entries_path %></div>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><%= link_to 'Home', diary_entries_path %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	</head>
 
-    <div class="container">
-<h1> My Hacklendar! </h1>
-<%= yield %>
+	<body>
+	
+	</body>
 
-</body>
+
+
+
+
 </html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Total Diary Entries: <%= @diary_entries.count %><p>
+Diary Entries where Mood is Happy: <%= @diary_entries_mood.count %> <p>
+
+
+	<% @diary_entries.each do |d| %>
+		<% if d.mood == 'happy' %>
+			<div style='color: green'>
+				<%= d.title %>
+				<%= d.description %>
+			</div>
+		<% else %>
+			<div>
+				<%= d.title %>
+				<%= d.description %>
+			</div>
+		<% end %>
+	<% end %>
+
+
+	<%= link_to 'Create Diary Entry', new_diary_entry_path %>
