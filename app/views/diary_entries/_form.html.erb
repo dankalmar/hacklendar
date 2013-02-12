@@ -1,21 +1,28 @@
 <%= form_for(@diary_entry) do |f| %>
 
-<div class="field">
-	<%= f.label :title %> <br />
-	<%= f.text_field :title %>
-</div> 
+	<% if @diary_entry.errors.any? %>
+		<h2> Something went wrong </h2>
+		<% @diary_entry.errors.full_messages.each do |error| %>
+			<p style="color:red"><%= error %></p>
+		<% end %>
+	<% end %>
 
-<div class="field">
-	<%= f.label :description %> <br />
-	<%= f.text_area :description %>
-</div> 
+	<div class="field">
+		<%= f.label :title %> <br />
+		<%= f.text_field :title %>
+	</div> 
 
-<div class="field">
-	<%= f.label :mood %> <br />
-	<%= f.text_field :mood %>
-</div> 
+	<div class="field">
+		<%= f.label :description %> <br />
+		<%= f.text_area :description %>
+	</div> 
 
-<%= f.submit %>
+	<div class="field">
+		<%= f.label :mood %> <br />
+		<%= f.text_field :mood %>
+	</div> 
+
+	<%= f.submit %>
 
 <% end %>
 

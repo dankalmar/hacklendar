@@ -11,14 +11,41 @@ class DiaryEntriesController < ApplicationController
 	end
 
 	def create
-		@diary_entry = DiaryEntry.new params["diary_entry"]
-		if @diary_entry.title == ''
-			render :new
-		else
-			@diary_entry.save
+		@diary_entry = DiaryEntry.new params[:diary_entry]
+
+		if @diary_entry.save
 			redirect_to diary_entries_path
+		else
+			render :new
+			
 		end
 	end
+
+	def edit
+	@diary_entry = DiaryEntry.find(params[:id])
+	end
+
+	def update
+		@diary_entry = DiaryEntry.find(params[:id])
+
+		if diary_entry.update_attributes params[:diary_entry]
+			redirect_to diary_entries_path
+		else
+			render :edit
+		end
+
+	end
+
+	def destroy
+	@diary_entry = DiaryEntry.find(params[:id])
+
+	@diary_entry.destroy
+
+	redirect_to diary_entries_path
+	end
+
+
+
 
 
 end
